@@ -1,6 +1,18 @@
+'use client'
 import Image from "next/image";
+import AgoraRTC from "agora-rtc-sdk-ng"
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    AgoraRTC.getCameras().then(devices => {
+      console.log('获取摄像头', devices);
+    }).catch(e => {
+      console.log("get deviceCameras error!", String(e));
+      if (String(e).indexOf('PERMISSION_DENIED') !== -1) {
+      }
+    });
+  }, [])
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
